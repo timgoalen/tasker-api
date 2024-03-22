@@ -6,9 +6,9 @@ from .models import Workspace
 class WorkspaceSerializer(serializers.HyperlinkedModelSerializer):
     """Serializer for the Workspace model."""
 
-    user = serializers.HiddenField(
-        default=serializers.CurrentUserDefault(), write_only=True
-    )
+    # user = serializers.HiddenField(
+    #     default=serializers.CurrentUserDefault(), write_only=True
+    # )
 
     class Meta:
         model = Workspace
