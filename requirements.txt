@@ -1,0 +1,10 @@
+asgiref==3.8.0
+black==24.3.0
+click==8.1.7
+Django==5.0.3
+django-ipware==6.0.4
+django-rest-authemail==2.1.7
+djangorestframework==3.15.0
+pathspec==0.12.1
+python-ipware==2.0.2
+sqlparse==0.4.4

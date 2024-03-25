@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
+    "authemail",
+    "users",
     "workspaces",
 ]
 
@@ -71,6 +74,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "tasker_api.wsgi.application"
 
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    )
+}
+
+# authmail setting:
+AUTH_USER_MODEL = 'users.MyUser'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
