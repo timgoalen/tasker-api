@@ -30,6 +30,10 @@ ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
+# authmail setting:
+AUTH_EMAIL_VERIFICATION = False
+AUTH_USER_MODEL = "users.MyUser"
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -37,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "rest_framework",
     "rest_framework.authtoken",
     "authemail",
@@ -45,6 +50,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -52,6 +59,16 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+# CORS_ALLOWED_ORIGINS = [
+#     "https://8000-timgoalen-taskerapi-ghx0286jesu.ws-eu110.gitpod.io",
+# ]
+
+CORS_ALLOW_ALL_ORIGINS: True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://8000-timgoalen-taskerapi-ghx0286jesu.ws-eu110.gitpod.io",
 ]
 
 ROOT_URLCONF = "tasker_api.urls"
@@ -81,8 +98,6 @@ REST_FRAMEWORK = {
     )
 }
 
-# authmail setting:
-AUTH_USER_MODEL = 'users.MyUser'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -135,3 +150,32 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Email settings
+# https://docs.djangoproject.com/en/3.1/topics/email/
+# https://docs.djangoproject.com/en/3.1/ref/settings/#email-host
+
+EMAIL_FROM = "timgoalen@hotmail.com"
+EMAIL_BCC = "timgoalen@hotmail.com"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "timgoalen@hotmail.com"
+EMAIL_HOST_PASSWORD = "fakepassword"
+
+# EMAIL_FROM = (
+#     os.environ.get("AUTHEMAIL_DEFAULT_EMAIL_FROM") or "<YOUR DEFAULT_EMAIL_FROM HERE>"
+# )
+# EMAIL_BCC = (
+#     os.environ.get("AUTHEMAIL_DEFAULT_EMAIL_BCC") or "<YOUR DEFAULT_EMAIL_BCC HERE>"
+# )
+
+# EMAIL_HOST = os.environ.get("AUTHEMAIL_EMAIL_HOST") or "smtp.gmail.com"
+# EMAIL_PORT = os.environ.get("AUTHEMAIL_EMAIL_PORT") or 587
+# EMAIL_HOST_USER = (
+#     os.environ.get("AUTHEMAIL_EMAIL_HOST_USER") or "<YOUR EMAIL_HOST_USER HERE>"
+# )
+# EMAIL_HOST_PASSWORD = (
+#     os.environ.get("AUTHEMAIL_EMAIL_HOST_PASSWORD") or "<YOUR EMAIL_HOST_PASSWORD HERE>"
+# )
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

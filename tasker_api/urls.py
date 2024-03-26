@@ -24,13 +24,14 @@ from workspaces import views as workspaces_views
 from users import views as users_views
 
 router = routers.DefaultRouter()
-router.register(r"users", users_views.UserViewSet)
+router.register(r"users", users_views.MyUserMeViewSet)
 router.register(r"workspaces", workspaces_views.WorkspacesViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path("", include(router.urls)),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    # path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("admin/", admin.site.urls),
+    path("api/accounts/", include("authemail.urls")),
 ]
