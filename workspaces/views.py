@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import permissions, viewsets
 from .models import Workspace
-from .serializers import WorkspaceSerializer
+from .serializers import WorkspaceSerializer, WorkspacesListSerializer
 
 
 class OwnerOrReadOnly(permissions.BasePermission):
@@ -39,7 +39,11 @@ class WorkspacesViewSet(viewsets.ModelViewSet):
         - Returns only the notes owned by the user.
     """
 
-    serializer_class = WorkspaceSerializer
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return WorkspacesListSerializer
+        return WorkspaceSerializer
+
     # permission_classes = [OwnerOrReadOnly]
     queryset = Workspace.objects.all()
 

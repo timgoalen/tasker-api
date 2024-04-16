@@ -12,6 +12,12 @@ class WorkspaceSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Workspace
-        fields = [
-            "id", "user", "title", "body", "created_on", "updated_on"
-            ]
+        fields = ["id", "user", "title", "body", "created_on", "updated_on"]
+
+
+class WorkspacesListSerializer(serializers.HyperlinkedModelSerializer):
+    """Serializer for the Workspace model list summary."""
+
+    class Meta:
+        model = Workspace
+        fields = ["id", "user", "title", "updated_on"]
